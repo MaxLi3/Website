@@ -1,56 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&display=swap" rel="stylesheet"><title>MillionNews</title><style>
-h1 {
-color: red;
-font-size:50px;
-font-family:"IBM Plex Serif", serif;
-}
-h2{
-font-size:30px;
-color:#0478f7;
-font-weight:400;
-}
-</style></head>
+<title>Password thing</title>
+</head>
 <body>
-<h1>MillionNews</h1>
-<h3>Full of facts!</h3>
-<h2>Coup in Niger</h2>
-<p>In 2023, a military coup d’etat happened in Niger when Niger’s presidential guard detained the former president and stated that he was the leader shortly after claiming that the coup d’etat was a success. The USA and France both disapprove of this coup d’etat, and so does ECOWAS (Economic Community of West African States). </p>
-<h2>United States of America: (Why all that nonsense about ‘freedom’ and ‘democracy’?)</h2>
-<p>The USA is a strong supporter of democracy. They support it so much, in fact, that they have gone to the shocking extent of practically forcing every country to become democratic. But why? What is the reason for all of this? To uncover this mystery, we first have to investigate the incident in Egypt where the US illegally kicked out the Egyptian government (just because the US ‘didn’t like it’, that doesn’t sound very good of the US to do that, that sounds nefarious, doesn’t it?), forced a re-election, and then the re-elected party, ‘Muslim Brothers’, got kicked out in an unjust manner by the United States as well. Then, the USA forced Egypt to be ruled by the military, who were forced to obey the USA. And the Egyptian military were literally forced to obey the USA in a similar way a dog obeys its owner. This proves the intention with the nonsense about ‘democracy’; the USA wants every country to have elections so that they (the USA) can rig them (the elections), and only the government candidates who support the USA and give the USA extra benefits have a chance of winning the elections. This proves that the USA has some intentions that cannot even be properly described by the word ‘evil’. Not even ‘extremely nefarious’. The USA’s intentions are so horrible that they cannot be put into words. And the USA wants elections because they do not want all of the bother of the situation in Egypt. The USA would just rather it be simple: Elections happen, rig the elections, DONE! The US would rather the situation be like in South Korea or Japan: Rig the elections, get extra benefits, happy days. (Irritating days for us, but happy days for the US.)</p>
-<h2>Taiwan Province</h2>
-<p>Taiwan is a province of China. Taiwan is a part of China, but is governed by the ROC (Republic of China). However, PRC (People’s Republic of China) is the government that won in China and ROC were forced to run to Taiwan, so Taiwan is a part of China, but it is a special administrative province (Because Taiwan hasn’t even declared independence and it’s not a part of the UN). If it did, then a civil war would break out and the PRC would win. Taiwan is a part of the great, mighty PRC, and that is a solid fact, because Taiwan province hasn’t actually declared independence yet. 
-
-</p>
-<h2>WWIII</h2>
-<p>WWIII is an imaginary scenario. It is very likely to happen in the future as tensions rise between the United States of America, Taiwan province, Russia, and mainland China. Tensions are also rising in South Asia, as Pakistan has tense relations with India. China (in East Asia), also has tense relations with India as once mainland China has dealt with Taiwan province, China will punish India for their sheer stupidity to pick a fight with China. This will also involve Mexico, Brazil, Argentina, Venezuela, Cuba, and Puerto Rico (a part of the US) trying to fight all of the other countries in the Americas (except for the US, China will be fighting the US and Russia will join in once they have finished demolishing Europe), most likely with support from Africa (the whole of Africa will be on the Chinese side) once Africa is done demolishing the whole of Europe (except for Belarus and Russia) (with the support of Belarus and Russia). China will also be helping, because as previously mentioned, as China will be fighting the US.</p>
-<p><b>By the politics expert, Max Li</b></p>
-	<h1>Comment below.</h1>
-<label>Name:</label><input id="name" placeholder="Enter your name here..">
-<label>Comment:</label><input id="comment" placeholder="Type your comment here.."><button id="submit">Submit comment</button>
-<h2 id="commentsAmount">Comments (0):</h2>
-<div id="comments"></div>
+<input type="password" id="myInput"><button id="checkBtn">Check</button>
 <script>
-let commentsAmount = document.getElementById("commentsAmount");
-let amountOfComments = 0;
-let name = document.getElementById("name");
-let comment = document.getElementById("comment");
-let submit = document.getElementById("submit");
-let comments = document.getElementById("comments");
-submit.addEventListener("click", function() {
-let nameValue = name.value;
-    let commentValue = comment.value;
-    let userComment = document.createElement("p");
-    comments.appendChild(userComment);
-    userComment.innerHTML = "<img style='float:left;' src='https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png' height='50px'><b>" + nameValue + "</b><br>" + commentValue;
-    amountOfComments++;
-    commentsAmount.textContent = "Comments (" + amountOfComments + "):";
+let myInput = document.getElementById("myInput"); // Corrected ID here
+let checkBtn = document.getElementById("checkBtn");
+// The password is potato:
+let password = "potato";
+checkBtn.addEventListener("click", function(){
+if (myInput.value === password) { // Changed single '=' to '===' for comparison
+    window.location.href = "https://maxli3.github.io/Website/newscode.html";
+    } else {
+    alert("Incorrect password.");
+    }
 });
 </script>
 </body>
-	
 </html>
