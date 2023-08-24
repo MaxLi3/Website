@@ -4,12 +4,12 @@
 <title>Password thing</title>
 </head>
 <body>
-<input type="password" id="myInput"><button id="checkBtn">Check</button>
+<input type="password" id="myInput" placeholder="Enter password here..."><button id="checkBtn">Login</button>
 <script>
 let myInput = document.getElementById("myInput"); // Corrected ID here
 let checkBtn = document.getElementById("checkBtn");
-// The password is potato:
-let password = "potato";
+// The password is Excellence!912:
+let password = "Excellence!912";
 checkBtn.addEventListener("click", function(){
 if (myInput.value === password) { // Changed single '=' to '===' for comparison
     window.location.href = "https://maxli3.github.io/Website/newscode.html";
