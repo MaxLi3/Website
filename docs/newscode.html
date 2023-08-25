@@ -30,7 +30,28 @@ font-weight:400;
 <h2>WWIII</h2>
 <p>WWIII is an imaginary scenario. It is very likely to happen in the future as tensions rise between the United States of America, Taiwan province, Russia, and mainland China. Tensions are also rising in South Asia, as Pakistan has tense relations with India. China (in East Asia), also has tense relations with India as once mainland China has dealt with Taiwan province, China will punish India for their sheer stupidity to pick a fight with China. This will also involve Mexico, Brazil, Argentina, Venezuela, Cuba, and Puerto Rico (a part of the US) trying to fight all of the other countries in the Americas (except for the US, China will be fighting the US and Russia will join in once they have finished demolishing Europe), most likely with support from Africa (the whole of Africa will be on the Chinese side) once Africa is done demolishing the whole of Europe (except for Belarus and Russia) (with the support of Belarus and Russia). China will also be helping, because as previously mentioned, as China will be fighting the US.</p>
 <p><b>By the politics expert, Max Li</b></p>
-
+	<h1>Comment below.</h1>
+<label>Name:</label><input id="name" placeholder="Enter your name here..">
+<label>Comment:</label><input id="comment" placeholder="Type your comment here.."><button id="submit">Submit comment</button>
+<h2 id="commentsAmount">Comments (0):</h2>
+<div id="comments"></div>
+<script>
+let commentsAmount = document.getElementById("commentsAmount");
+let amountOfComments = 0;
+let name = document.getElementById("name");
+let comment = document.getElementById("comment");
+let submit = document.getElementById("submit");
+let comments = document.getElementById("comments");
+submit.addEventListener("click", function() {
+let nameValue = name.value;
+    let commentValue = comment.value;
+    let userComment = document.createElement("p");
+    comments.appendChild(userComment);
+    userComment.innerHTML = "<img style='float:left;' src='https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png' height='50px'><b>" + nameValue + "</b><br>" + commentValue;
+    amountOfComments++;
+    commentsAmount.textContent = "Comments (" + amountOfComments + "):";
+});
+</script>
 </body>
 	
 </html>
