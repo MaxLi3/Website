@@ -78,6 +78,12 @@ let nameValue = name.value;
     userComment.innerHTML = "<img style='float:left;' src='https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png' height='50px'><b>" + nameValue + "</b><br>" + commentValue;
     amountOfComments++;
     commentsAmount.textContent = "Comments (" + amountOfComments + "):";
+    let commentValueArray = commentValue.split(" ");
+    commentValueArray.forEach(word => {
+        if (word === "biased" || word === "biased." || word === "biased!") {
+            window.location.href = "https://albertkemp.github.io/errorPage/";
+        }
+    })
 });
 </script>
 </body>
