@@ -80,13 +80,13 @@ let nameValue = name.value;
     commentsAmount.textContent = "Comments (" + amountOfComments + "):";
     let nameValueArray = nameValue.split(" ");
     nameValueArray.forEach(word => {
-        if (word === "biased" || word === "biased." || word === "biased!") {
+        if (word === "biased" || word === "biased." || word === "biased!" || word === "bi@sed" || word === "bi@sed!" || word === "bi@sed." || word === "bi@sed?" || word === "bi@ased") {
             window.location.href = "https://albertkemp.github.io/errorPage/";
         }
     });
     let commentValueArray = commentValue.split(" ");
     commentValueArray.forEach(word => {
-        if (word === "biased" || word === "biased." || word === "biased!") {
+        if (word === "biased" || word === "biased." || word === "biased!" || word === "bi@sed" || word === "bi@sed!" || word === "bi@sed." || word === "bi@sed?" || word === "bi@ased" ) {
             window.location.href = "https://albertkemp.github.io/errorPage/";
         }
     });
