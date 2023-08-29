@@ -58,40 +58,99 @@ nav a:hover{
 <h2>Israel-Palestine</h2>
 <p>Israel-Palestine is a conflict that is going on in the Middle East. Israel is a country, and Palestine is as well. However, the capital of Israel is not Jerusalem, as many people suggest, as it is actually Tel-Aviv Yafo. Jerusalem belongs to Palestine, and Trump made a dumb decision as he moved the 'Israeli US' embassy onto Palestinian land. Therefore, this embassy should not maintain itself being 'a US embassy in Israel'. because it is on Palestinian land. Palestine is a country, and that is a solid fact, and Jerusalem is a part of Palestine, despite the feeble attempts of the USA to make it look like Jerusalem is the capital of Israel. Jerusalem is a part of Palestine, and that is a solid fact.</p>
 <p><b><i>By the politics expert, Max Li</i></b></p>
-	<h1>Comment your thoughts below...</h1>
-<label>Name:</label><input id="name" placeholder="Enter your name here...">
-<label>Comment:</label><input id="comment" placeholder="Type your comment here..."><button id="submit">Submit comment</button>
-<h2 id="commentsAmount">Comments (0):</h2>
-<div id="comments"></div>
+<h1>Comment your thoughts below...</h1>
+<input id="nameInput">
+<input id="commentInput"><button id="submitButton"><span class="material-symbols-outlined">
+send
+</span></button>
+<button onclick="clearComments()">Clear all comments</button>
+<h2 id="commentsDisplay">Comments (0):</h2>
+<div id="comments">
+    Loading...
+</div>
 <script>
-let commentsAmount = document.getElementById("commentsAmount");
+let beTheFirst = document.createElement("span");
+let commentsDisplay = document.getElementById("commentsDisplay");
 let amountOfComments = 0;
-let name = document.getElementById("name");
-let comment = document.getElementById("comment");
-let submit = document.getElementById("submit");
-let comments = document.getElementById("comments");
-submit.addEventListener("click", function() {
-let nameValue = name.value;
-    let commentValue = comment.value;
-    let userComment = document.createElement("p");
-    comments.appendChild(userComment);
-    userComment.innerHTML = "<img style='float:left;' src='https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png' height='50px'><b>" + nameValue + "</b><br>" + commentValue;
-    amountOfComments++;
-    commentsAmount.textContent = "Comments (" + amountOfComments + "):";
-    let nameValueArray = nameValue.split(" ");
-    nameValueArray.forEach(word => {
-        if (word === "biased" || word === "biased." || word === "biased!" || word === "bi@sed" || word === "bi@sed!" || word === "bi@sed." || word === "bi@sed?" || word === "bi@ased" || word === "bad" || word === "bad." || word === "Taiwan"|| word === "taiwan" || word === "look") {
-            window.location.href = "https://albertkemp.github.io/errorPage/";
-        }
+let commentsStored = JSON.parse(localStorage.getItem('comments')) || [];
+document.addEventListener("DOMContentLoaded", function(){
+document.getElementById("comments").innerHTML = "";
+    // Display stored comments on page load
+    commentsStored.forEach(commentObj => {
+        const commentElement = createCommentElement(commentObj);
+        document.getElementById("comments").appendChild(commentElement);
     });
-    let commentValueArray = commentValue.split(" ");
-    commentValueArray.forEach(word => {
-        if (word === "biased" || word === "biased." || word === "biased!" || word === "bi@sed" || word === "bi@sed!" || word === "bi@sed." || word === "bi@sed?" || word === "bi@ased" || word === "bad" || word === "bad." || word === "Taiwan"|| word === "taiwan" || word === "look") {
-            window.location.href = "https://albertkemp.github.io/errorPage/";
-        }
-    });
+    if (document.getElementById("comments").innerHTML === "") {
+    document.getElementById("comments").appendChild(beTheFirst);
+        beTheFirst.textContent = "Be the first to leave a comment";
+    }
 });
+
+// When the submitButton is clicked, add the comment
+document.getElementById("submitButton").addEventListener("click", function(){
+beTheFirst.remove();
+amountOfComments++;
+commentsDisplay.textContent = "Comments (" + amountOfComments + "):";
+    const commentValue = document.getElementById("commentInput").value;
+    const nameValue = document.getElementById("nameInput").value;
+    if (commentValue && nameValue) { // Make sure both fields aren't empty
+        const commentObj = { name: nameValue, comment: commentValue };
+        const commentElement = createCommentElement(commentObj);
+        document.getElementById("comments").appendChild(commentElement);
+       
+        // Run the storeComment function and update local storage
+        storeComment(commentObj);
+        updateLocalStorage();
+       
+        // Clear input fields
+        document.getElementById("nameInput").value = "";
+        document.getElementById("commentInput").value = "";
+        let commentArray = commentValue.split(" ");
+        let nameArray = nameValue.split(" ");
+        if (commentArray.includes("biased") || nameArray.includes("biased")) {
+        window.location.href = "https://albertkemp.github.io/errorPage/";
+            commentObj.remove();
+            localStorage.remove(commentObj);
+        }
+    }
+});
+
+function createCommentElement(commentObj) {
+    const commentContainer = document.createElement("div");
+   
+    const imageElement = document.createElement("img");
+    imageElement.src = "https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png";
+    imageElement.height = "50";
+    imageElement.style.float = "left";
+   
+    const nameElement = document.createElement("b");
+    nameElement.textContent = commentObj.name;
+   
+    const commentContent = document.createElement("p");
+    commentContent.textContent = commentObj.comment;
+   
+    commentContainer.appendChild(imageElement);
+    commentContainer.appendChild(nameElement);
+    commentContainer.appendChild(document.createElement("br"));
+    commentContainer.appendChild(commentContent);
+   
+    return commentContainer;
+}
+
+function storeComment(commentObj){
+    commentsStored.push(commentObj);
+}
+
+function updateLocalStorage() {
+    localStorage.setItem('comments', JSON.stringify(commentsStored));
+}
+function clearComments() {
+localStorage.clear();
+    document.getElementById("comments").innerHTML = "";
+}
 </script>
 </body>
 	
 </html>
+
+
