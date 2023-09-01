@@ -64,10 +64,6 @@ nav a:hover{
 <h2 id="commentsAmount">Comments (0):</h2>
 <div id="comments"></div>
 <script>
-window.history.pushState(null, null, window.location.href);
-window.onpopstate = function () {
-    window.history.go(1);
-};
 let beTheFirst = document.createElement("span");
 let commentsDisplay = document.getElementById("commentsDisplay");
 let amountOfComments = 0;
