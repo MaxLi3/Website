@@ -63,87 +63,96 @@ nav a:hover{
 <label>Comment:</label><input id="comment" placeholder="Type your comment here..."><button id="submit">Submit comment</button>
 <h2 id="commentsAmount">Comments (0):</h2>
 <div id="comments"></div>
-<script>
-let beTheFirst = document.createElement("span");
-let commentsDisplay = document.getElementById("commentsDisplay");
-let amountOfComments = 0;
-let commentsStored = JSON.parse(localStorage.getItem('comments')) || [];
-document.addEventListener("DOMContentLoaded", function(){
-document.getElementById("comments").innerHTML = "";
-    // Display stored comments on page load
-    commentsStored.forEach(commentObj => {
-        const commentElement = createCommentElement(commentObj);
-        document.getElementById("comments").appendChild(commentElement);
-    });
-    if (document.getElementById("comments").innerHTML === "") {
-    document.getElementById("comments").appendChild(beTheFirst);
-        beTheFirst.textContent = "Be the first to leave a comment";
-    }
-});
+<h1>Comment your thoughts below...</h1>
+    <label>Name:</label><input id="nameInput" placeholder="Type your name here...">
+    <label>Comment:</label><input id="commentInput" placeholder="Type your comment here...">
+    <button id="submit">Submit comment</button>
+    <h2 id="commentsAmount">Comments (0):</h2>
+    <div id="comments"></div>
+    <script>
+        let beTheFirst = document.createElement("span");
+        let commentsDisplay = document.getElementById("commentsAmount");
+        let amountOfComments = 0;
+        let commentsStored = JSON.parse(localStorage.getItem('comments')) || [];
 
-// When the submitButton is clicked, add the comment
-document.getElementById("submitButton").addEventListener("click", function(){
-beTheFirst.remove();
-amountOfComments++;
-commentsDisplay.textContent = "Comments (" + amountOfComments + "):";
-    const commentValue = document.getElementById("commentInput").value;
-    const nameValue = document.getElementById("nameInput").value;
-    if (commentValue && nameValue) { // Make sure both fields aren't empty
-        const commentObj = { name: nameValue, comment: commentValue };
-        const commentElement = createCommentElement(commentObj);
-        document.getElementById("comments").appendChild(commentElement);
-       
-        // Run the storeComment function and update local storage
-        storeComment(commentObj);
-        updateLocalStorage();
-       
-        // Clear input fields
-        document.getElementById("nameInput").value = "";
-        document.getElementById("commentInput").value = "";
-        let commentArray = commentValue.split(" ");
-        let nameArray = nameValue.split(" ");
-        if (commentArray.includes("biased") || nameArray.includes("biased")) {
-        window.location.href = "https://albertkemp.github.io/errorPage/";
-            commentObj.remove();
-            localStorage.remove(commentObj);
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("comments").innerHTML = "";
+            // Display stored comments on page load
+            commentsStored.forEach(commentObj => {
+                const commentElement = createCommentElement(commentObj);
+                document.getElementById("comments").appendChild(commentElement);
+            });
+            if (document.getElementById("comments").innerHTML === "") {
+                document.getElementById("comments").appendChild(beTheFirst);
+                beTheFirst.textContent = "Be the first to leave a comment";
+            }
+        });
+
+        // When the submit button is clicked, add the comment
+        document.getElementById("submit").addEventListener("click", function () {
+            beTheFirst.remove();
+            amountOfComments++;
+            commentsDisplay.textContent = "Comments (" + amountOfComments + "):";
+            const commentValue = document.getElementById("commentInput").value;
+            const nameValue = document.getElementById("nameInput").value;
+            if (commentValue && nameValue) { // Make sure both fields aren't empty
+                const commentObj = { name: nameValue, comment: commentValue };
+                const commentElement = createCommentElement(commentObj);
+                document.getElementById("comments").appendChild(commentElement);
+
+                // Run the storeComment function and update local storage
+                storeComment(commentObj);
+                updateLocalStorage();
+
+                // Clear input fields
+                document.getElementById("nameInput").value = "";
+                document.getElementById("commentInput").value = "";
+                let commentArray = commentValue.split(" ");
+                let nameArray = nameValue.split(" ");
+                if (commentArray.includes("biased") || nameArray.includes("biased")) {
+                    window.location.href = "https://albertkemp.github.io/errorPage/";
+                    commentElement.remove(); // Remove the comment element from the DOM
+                    commentsStored.splice(commentsStored.indexOf(commentObj), 1); // Remove the comment from the array
+                    updateLocalStorage(); // Update localStorage after removing the comment
+                }
+            }
+        });
+
+        function createCommentElement(commentObj) {
+            const commentContainer = document.createElement("div");
+
+            const imageElement = document.createElement("img");
+            imageElement.src = "https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png";
+            imageElement.height = "50";
+            imageElement.style.float = "left";
+
+            const nameElement = document.createElement("b");
+            nameElement.textContent = commentObj.name;
+
+            const commentContent = document.createElement("p");
+            commentContent.textContent = commentObj.comment;
+
+            commentContainer.appendChild(imageElement);
+            commentContainer.appendChild(nameElement);
+            commentContainer.appendChild(document.createElement("br"));
+            commentContainer.appendChild(commentContent);
+
+            return commentContainer;
         }
-    }
-});
 
-function createCommentElement(commentObj) {
-    const commentContainer = document.createElement("div");
-   
-    const imageElement = document.createElement("img");
-    imageElement.src = "https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png";
-    imageElement.height = "50";
-    imageElement.style.float = "left";
-   
-    const nameElement = document.createElement("b");
-    nameElement.textContent = commentObj.name;
-   
-    const commentContent = document.createElement("p");
-    commentContent.textContent = commentObj.comment;
-   
-    commentContainer.appendChild(imageElement);
-    commentContainer.appendChild(nameElement);
-    commentContainer.appendChild(document.createElement("br"));
-    commentContainer.appendChild(commentContent);
-   
-    return commentContainer;
-}
+        function storeComment(commentObj) {
+            commentsStored.push(commentObj);
+        }
 
-function storeComment(commentObj){
-    commentsStored.push(commentObj);
-}
+        function updateLocalStorage() {
+            localStorage.setItem('comments', JSON.stringify(commentsStored));
+        }
 
-function updateLocalStorage() {
-    localStorage.setItem('comments', JSON.stringify(commentsStored));
-}
-function clearComments() {
-localStorage.clear();
-    document.getElementById("comments").innerHTML = "";
-}
-</script>
+        function clearComments() {
+            localStorage.clear();
+            document.getElementById("comments").innerHTML = "";
+        }
+    </script>
 </body>
 	
 </html>
